@@ -33,7 +33,7 @@ public class HttpUtil {
             url = url + "?" + params;
         }
 
-        System.out.println("test url is :" + url);
+//        System.out.println("url is :" + url);
         Request request = new Request.Builder()
                 .url(url)
                 .get()
@@ -44,8 +44,43 @@ public class HttpUtil {
         Response response = client.newCall(request).execute();
         if(response.isSuccessful()){
             String respBody = response.body().string();
-            System.out.println("resp body is: " + respBody );
+//            System.out.println("resp body is: " + respBody );
             return respBody;
+
+        }else {
+            throw new IOException("Unexpected code " + response);
+        }
+
+    }
+
+    /**
+     * 发送geeeeeeeeet请求，不携带认证信息
+     * @param path
+     * @param params
+     * @return
+     * @throws Exception
+     */
+    public String doGetWithoutToken(String path , String params) throws Exception{
+
+        OkHttpClient client = new OkHttpClient();
+        String url = Config.url + path;
+        if (!url.startsWith("http://")){
+            url = "http://" + url;
+        }
+
+        if(params != null && params.length() != 0){
+            url = url + "?" + params;
+        }
+
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+
+
+        Response response = client.newCall(request).execute();
+        if(response.isSuccessful()){
+            return response.body().string();
 
         }else {
             throw new IOException("Unexpected code " + response);
@@ -58,12 +93,40 @@ public class HttpUtil {
 
     /**
      *
-     * 发送pooooost请求
+     * 发送pooooost请求,不携带认证信息
      * @param params
      * @param json
      * @return
      * @throws Exception
      */
+
+    public String doPostWithoutToken(String path, String params, String json) throws Exception{
+
+        OkHttpClient client = new OkHttpClient();
+        String url = Config.url + path;
+        if (!url.startsWith("http://")){
+            url = "http://" + url;
+        }
+
+        if(params != null && params.length() != 0){
+            url = url + "?" + params;
+        }
+
+        RequestBody body = RequestBody.create(JSON, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .addHeader("content-type", "application/json")
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.isSuccessful()) {
+            return response.body().string();
+        } else {
+            throw new IOException("Unexpected code " + response);
+        }
+
+    }
+
 
     public String doPost(String path, String params, String json) throws Exception{
 

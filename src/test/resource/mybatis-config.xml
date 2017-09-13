@@ -19,6 +19,6 @@
 
     <!-- 加载mapper映射文件 -->
     <mappers>
-        <mapper resource="mybatis-mapper/HttpParamDao.xml"/>
+        <mapper resource="mybatis-mapper/HttpParam-mapper.xml"/>
     </mappers>
 </configuration>

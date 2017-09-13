@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by zhengda on 2017/9/6.
  */
-public class Common {
+public class CommonUtil {
 
 
     /**
@@ -45,7 +45,6 @@ public class Common {
     }
 
 
-
     private HttpUtil httpUtil = new HttpUtil();
 
 
@@ -60,10 +59,9 @@ public class Common {
         Map mapType = JSON.parseObject(s,Map.class);
         JSONObject jsonObject = (JSONObject) mapType.get("paths");
         for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
-            System.out.println(entry.getKey() );
-//            System.out.println(entry.getValue());
+            CommonUtil.log(entry.getKey());
         }
-        System.out.println(jsonObject.size() );
+        CommonUtil.log(String.valueOf(jsonObject.size()));
     }
 
 }

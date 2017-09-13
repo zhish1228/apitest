@@ -1,5 +1,7 @@
 package com.tongdao.utils;
 
+import com.tongdao.conf.Config;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
@@ -15,12 +17,11 @@ public class UserInfoUtil {
      */
     public static String getRealName(){
 
-        char[] ch=new char[4];
-        for(int i =0; i<4; i++){
+        char[] ch=new char[3];
+        for(int i =0; i< ch.length; i++){
             ch[i] = getRandomChar();
         }
-        String userName = String.valueOf(ch);
-        return userName;
+        return String.valueOf(ch) + Config.nameSuffix;
     }
 
 
@@ -91,7 +92,6 @@ public class UserInfoUtil {
             str = new String(b, "GBK");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            System.out.println("错误");
         }
 
         return str.charAt(0);
