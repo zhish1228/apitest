@@ -22,8 +22,6 @@ public class ZTest extends BaseTest{
     @Test
     public void test1() {
 
-        CommonUtil.log("sssss");
-
     }
 
 }
