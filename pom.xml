@@ -12,9 +12,9 @@
 
         <resources>
             <resource>
-                <directory>src/test</directory>
+                <directory>src/test/resource</directory>
                 <includes>
-                    <include>**/*.xml</include>
+                    <include>*.xml</include>
                 </includes>
             </resource>
         </resources>
