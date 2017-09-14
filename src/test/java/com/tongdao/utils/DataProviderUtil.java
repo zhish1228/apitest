@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class DataProviderUtil {
 
-    private  static SqlSessionFactory sqlSessionFactory = MyBatisUtil.getSqlsessionfactory("mybatis-config.xml");
+    private  static SqlSessionFactory sqlSessionFactory = MyBatisUtil.getSqlsessionfactory("/src/test/resource/mybatis-config.xml");
 
 
     /**
