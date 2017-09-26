@@ -61,6 +61,7 @@ public class UserTest extends BaseTest {
     public void getUserListTest(HttpParam httpParam) throws Exception{
 
     String respBody = httpUtil.doGet(httpParam.getPath(),"");
+    System.out.println(respBody);
     Map mapType = JSON.parseObject(respBody,Map.class);
     int code = (Integer)mapType.get("code");
     Assert.assertEquals(code , 0);
@@ -92,7 +93,8 @@ public class UserTest extends BaseTest {
     @Test(dataProvider = "httpParamsDataProvider", dataProviderClass = DataProviderUtil.class)
     public void enableUserTest(HttpParam httpParam) throws Exception{
 
-        String respBody =httpUtil.doPut(httpParam.getPath(),httpParam.getRequestParams(), httpParam.getRequestBody());
+        String path = httpParam.getPath().replace("$userId", String.valueOf(userId));
+        String respBody =httpUtil.doPut(path, httpParam.getRequestParams(), httpParam.getRequestBody());
         Map mapType = JSON.parseObject(respBody,Map.class);
         int code = (Integer)mapType.get("code");
         Assert.assertEquals(code , 0);
