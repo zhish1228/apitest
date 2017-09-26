@@ -61,7 +61,6 @@ public class UserTest extends BaseTest {
     public void getUserListTest(HttpParam httpParam) throws Exception{
 
     String respBody = httpUtil.doGet(httpParam.getPath(),"");
-    System.out.println(respBody);
     Map mapType = JSON.parseObject(respBody,Map.class);
     int code = (Integer)mapType.get("code");
     Assert.assertEquals(code , 0);
