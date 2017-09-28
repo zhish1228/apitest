@@ -17,3 +17,6 @@ http请求的参数
 
 # utils
 数据库、http、dataprovider、随机用户信息
+
+# todo
+失败重试、运行log、多线程执行
