@@ -9,7 +9,9 @@ public class MConfig {
   public static final int port = 20000;
   public static final String userName = "data-test";
   public static final char[] passWord = "123456".toCharArray();
+  // db name
   public static final String dataBase = "market-data-v1";
+  // table name
   public static final String collectionName = "KLine";
 
 }

@@ -54,6 +54,7 @@ public class MongoTest {
     MongoCredential credential = MongoCredential.createCredential(MConfig.userName, MConfig.dataBase, MConfig.passWord);
     // 测试环境db 需要支持登录校验
     // MongoClient mongoClient = new MongoClient(new ServerAddress(MConfig.ip, MConfig.port), credential, options);
+    // 本地测试环境只需要ip port
     MongoClient mongoClient = new MongoClient(new ServerAddress("192.168.201.229", 27017));
     MongoDatabase database = mongoClient.getDatabase(MConfig.dataBase);
     kLineCollection = database.getCollection(MConfig.collectionName);
@@ -82,11 +83,12 @@ public class MongoTest {
     Gson gson = new Gson();
     String kJson = gson.toJson(k2);
 
-    List<Document> t = new ArrayList<>();
-    t.add(Document.parse(kJson));
-    kLineCollection.insertMany(t);
+    List<Document> documentList = new ArrayList<>();
+    documentList.add(Document.parse(kJson));
+    kLineCollection.insertMany(documentList);
 
     long afterTest = kLineCollection.countDocuments();
+    // 测试过后插入了两条数据
     Assert.assertEquals(afterTest - beforeTest, 2);
 
   }
@@ -96,23 +98,23 @@ public class MongoTest {
 
     // 表数据总数
     log.info("总数量:" + kLineCollection.countDocuments());
-    // 查询条件
+    // 查询条件*2
     BasicDBObject queryObject = new BasicDBObject("code", "A90001").append("amount", 376420L);
     FindIterable<Document> documents = kLineCollection.find(queryObject);
     MongoCursor<Document> iterator = documents.iterator();
     while (iterator.hasNext()) {
       // https://stackoverflow.com/questions/35209839/converting-document-objects-in-mongodb-3-to-pojos
+      // 修正转换格式
       JsonWriterSettings settings = JsonWriterSettings.builder().int64Converter(new Converter<Long>() {
         @Override
         public void convert(Long value, StrictJsonWriter writer) {
           writer.writeNumber(value.toString());
         }
       }).build();
-
       String s = iterator.next().toJson(settings);
       Gson g = new Gson();
-      KLine o = g.fromJson(s, KLine.class);
-      log.info(o.getCode());
+      KLine kLine = g.fromJson(s, KLine.class);
+      log.info("kline code is:" + kLine.getCode());
     }
   }
 
@@ -132,8 +134,8 @@ public class MongoTest {
     long beforeTest = kLineCollection.countDocuments();
     kLineCollection.deleteMany(Filters.eq("code", code));
     long afterTest = kLineCollection.countDocuments();
-    log.info("beforeTest is" + beforeTest);
-    log.info("afterTest is" + afterTest);
+    log.info("beforeTest is:" + beforeTest);
+    log.info("afterTest is:" + afterTest);
 
   }
 }
