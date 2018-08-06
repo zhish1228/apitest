@@ -1,6 +1,6 @@
 package com.tongdao.dao;
 
-import com.tongdao.bean.HttpParam;
+import com.tongdao.entity.HttpParamEntity;
 
 import java.util.List;
 
@@ -9,6 +9,9 @@ import java.util.List;
  */
 public interface HttpParamDao {
 
-    List<HttpParam> selectByCaseName(String caseName);
+  /**
+   * 查测试数据
+   */
+  List<HttpParamEntity> selectByCaseName(String caseName);
 
 }

@@ -1,61 +1,60 @@
 package com.tongdao.cases;
 
 import com.alibaba.fastjson.JSON;
-import com.tongdao.bean.HttpParam;
 import com.tongdao.conf.Config;
-import com.tongdao.utils.CommonUtil;
-import com.tongdao.utils.DataProviderUtil;
-import com.tongdao.utils.HttpUtil;
+import com.tongdao.entity.HttpParamEntity;
+import com.tongdao.util.CommonUtil;
+import com.tongdao.util.DataProviderUtil;
+import com.tongdao.util.HttpUtil;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Map;
 
-public class AuthTest extends BaseTest{
+public class AuthTest extends BaseTest {
 
-    private HttpUtil httpUtil = new HttpUtil();
+  @Test(dataProvider = "HttpParamDataProvider", dataProviderClass = DataProviderUtil.class)
+  public void getVerifyCodeTest(HttpParamEntity HttpParamEntity) throws Exception {
 
-    @Test(dataProvider = "httpParamsDataProvider", dataProviderClass = DataProviderUtil.class)
-    public void getVerifyCodeTest(HttpParam httpParam) throws Exception{
+    String epoch = CommonUtil.getEpoch();
+    String params = "timeStamp=" + epoch;
+    String s = HttpUtil.doGet(HttpParamEntity.getPath(), params);
+  }
 
-        String epoch = CommonUtil.getEpoch();
-        String params = "timeStamp=" + epoch;
-        String s = httpUtil.doGet(httpParam.getPath(), params);
-    }
+  @Test(enabled = false, dataProvider = "HttpParamDataProvider", dataProviderClass = DataProviderUtil.class)
+  public void createUserTest(HttpParamEntity HttpParamEntity) throws Exception {
+    String reqBody = HttpParamEntity.getRequestBody();
+    reqBody = reqBody.replace("$username", Config.userName).
+        replace("$realname", Config.realName).
+        replace("$mobile", Config.mobile).
+        replace("$email", Config.email);
 
-    @Test(enabled = false, dataProvider = "httpParamsDataProvider", dataProviderClass = DataProviderUtil.class)
-    public void createUserTest(HttpParam httpParam) throws Exception{
-        String reqBody = httpParam.getRequestBody();
-        reqBody = reqBody.replace("$username", Config.userName).
-                          replace("$realname", Config.realName).
-                          replace("$mobile", Config.mobile).
-                          replace("$email", Config.email);
+    String respBody = HttpUtil.doPost(HttpParamEntity.getPath(), HttpParamEntity.getRequestParams(), reqBody);
+    Map mapType = JSON.parseObject(respBody, Map.class);
+    int code = (Integer) mapType.get("code");
+    Assert.assertEquals(code, 0);
 
-        String respBody = httpUtil.doPost(httpParam.getPath(), httpParam.getRequestParams(), reqBody);
-        Map mapType = JSON.parseObject(respBody,Map.class);
-        int code = (Integer)mapType.get("code");
-        Assert.assertEquals(code , 0);
-
-    }
+  }
 
 
-    @Test(enabled = false,dataProvider = "httpParamsDataProvider", dataProviderClass = DataProviderUtil.class)
-    public void loginTest(HttpParam httpParam) throws Exception{
+  @Test(enabled = false, dataProvider = "HttpParamDataProvider", dataProviderClass = DataProviderUtil.class)
+  public void loginTest(HttpParamEntity HttpParamEntity) throws Exception {
 
     String epoch = CommonUtil.getEpoch();
     String url = "/api/v1/auth/verifycode?timeStamp=" + String.valueOf(epoch);
-    httpUtil.doGet(url,  "");
+    HttpUtil.doGet(url, "");
 
     String verifyCode = CommonUtil.getVerifyCode(epoch);
-    String reqBody = httpParam.getRequestBody().replace("$userName", Config.adminName)
-            .replace("$passwd", Config.adminPassword).replace("$codeId", String.valueOf(epoch))
-            .replace("$code", verifyCode);
+    String reqBody = HttpParamEntity.getRequestBody().replace("$userName", Config.adminName)
+        .replace("$passwd", Config.adminPassword).replace("$codeId", String.valueOf(epoch))
+        .replace("$code", verifyCode);
 
-    String respBody = httpUtil.doPost(httpParam.getPath(), "", reqBody);
-    Map mapType = JSON.parseObject(respBody,Map.class);
-    int code = (Integer)mapType.get("code");
-    Assert.assertEquals(code , 0);
+    String respBody = HttpUtil.doPost(HttpParamEntity.getPath(), "", reqBody);
+    Map mapType = JSON.parseObject(respBody, Map.class);
+    int code = (Integer) mapType.get("code");
+    Assert.assertEquals(code, 0);
 
-    }
+  }
 
 }

@@ -15,6 +15,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.td.spec.marketdata.common.entity.KLine;
 import com.tongdao.conf.MConfig;
+import com.tongdao.conf.test.RetryAnalyzer;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,6 +24,8 @@ import org.bson.json.Converter;
 import org.bson.json.JsonWriterSettings;
 import org.bson.json.StrictJsonWriter;
 import org.testng.Assert;
+import org.testng.ITestContext;
+import org.testng.ITestNGMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -42,7 +45,12 @@ public class MongoTest {
   private final String code = "spec001";
 
   @BeforeClass
-  public void setuP() {
+  public void setUp(ITestContext context) {
+
+    // 全局添加重试监听器
+    for (ITestNGMethod method : context.getAllTestMethods()) {
+      method.setRetryAnalyzer(new RetryAnalyzer());
+    }
 
     log.info("===============MongoDB初始化========================");
     MongoClientOptions options = new MongoClientOptions.Builder()
@@ -136,6 +144,6 @@ public class MongoTest {
     long afterTest = kLineCollection.countDocuments();
     log.info("beforeTest is:" + beforeTest);
     log.info("afterTest is:" + afterTest);
-
   }
+
 }

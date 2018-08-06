@@ -1,38 +1,36 @@
 package com.tongdao.cases;
 
 import com.alibaba.fastjson.JSON;
-import com.tongdao.bean.HttpParam;
-import com.tongdao.utils.CommonUtil;
-import com.tongdao.utils.DataProviderUtil;
-import com.tongdao.utils.HttpUtil;
+import com.tongdao.entity.HttpParamEntity;
+import com.tongdao.util.DataProviderUtil;
+import com.tongdao.util.HttpUtil;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import java.util.Map;
 
 /**
  * Created by zhengda on 2017/9/11.
  */
-public class ResourceTest extends BaseTest{
+public class ResourceTest extends BaseTest {
 
-    private HttpUtil httpUtil = new HttpUtil();
+  @Test(dataProvider = "httpParamsDataProvider", dataProviderClass = DataProviderUtil.class)
+  public void getFunctionsTest(HttpParamEntity httpParam) throws Exception {
 
-    @Test(dataProvider = "httpParamsDataProvider", dataProviderClass = DataProviderUtil.class)
-    public void getFunctionsTest(HttpParam httpParam) throws Exception{
+    String respBody = HttpUtil.doGet(httpParam.getPath(), httpParam.getRequestParams());
+    Map mapType = JSON.parseObject(respBody, Map.class);
+    int code = (Integer) mapType.get("code");
+    Assert.assertEquals(code, 0);
+  }
 
-        String respBody = httpUtil.doGet(httpParam.getPath(),httpParam.getRequestParams());
-        Map mapType = JSON.parseObject(respBody,Map.class);
-        int code = (Integer)mapType.get("code");
-        Assert.assertEquals(code , 0);
-    }
+  @Test(dataProvider = "httpParamsDataProvider", dataProviderClass = DataProviderUtil.class)
+  public void getMenuResourcesTest(HttpParamEntity httpParam) throws Exception {
 
-
-    @Test(dataProvider = "httpParamsDataProvider", dataProviderClass = DataProviderUtil.class)
-    public void getMenuResourcesTest(HttpParam httpParam) throws Exception{
-
-        String respBody = httpUtil.doGet(httpParam.getPath(),httpParam.getRequestParams());
-        Map mapType = JSON.parseObject(respBody,Map.class);
-        int code = (Integer)mapType.get("code");
-        Assert.assertEquals(code , 0);
-    }
+    String respBody = HttpUtil.doGet(httpParam.getPath(), httpParam.getRequestParams());
+    Map mapType = JSON.parseObject(respBody, Map.class);
+    int code = (Integer) mapType.get("code");
+    Assert.assertEquals(code, 0);
+  }
 
 }
