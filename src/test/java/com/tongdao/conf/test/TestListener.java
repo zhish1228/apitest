@@ -34,8 +34,8 @@ public class TestListener extends TestListenerAdapter {
     methodName = tr.getName();
     className = tr.getTestClass().getName();
 
-    System.out.println("测试类:" + className + "  中测试方法:" + methodName + " 执行失败");
-    System.out.println("测试开始时间:" + startTime + ".测试完成时间:" + endTime + ".测试耗时:" + execTime);
+    log.info("测试类:" + className + "  中测试方法:" + methodName + " 执行失败");
+    log.info("测试开始时间:" + startTime + ".测试完成时间:" + endTime + ".测试耗时:" + execTime);
   }
 
   @Override
@@ -48,8 +48,8 @@ public class TestListener extends TestListenerAdapter {
     methodName = tr.getName();
     className = tr.getTestClass().getName();
 
-    System.out.println("测试类:" + className + "  中测试方法:" + methodName + " 跳过执行");
-    System.out.println("测试开始时间:" + startTime + ".测试完成时间:" + endTime + ".测试耗时:" + execTime);
+    log.info("测试类:" + className + "  中测试方法:" + methodName + " 跳过执行");
+    log.info("测试开始时间:" + startTime + ".测试完成时间:" + endTime + ".测试耗时:" + execTime);
 
   }
 
@@ -63,10 +63,9 @@ public class TestListener extends TestListenerAdapter {
     methodName = tr.getName();
     className = tr.getTestClass().getName();
 
-    System.out.println("测试类:" + className + "  中测试方法:" + methodName + " 执行成功");
-    System.out.println("测试开始时间:" + startTime + ".测试完成时间:" + endTime + ".测试耗时:" + execTime);
+    log.info("测试类:" + className + "  中测试方法:" + methodName + " 执行成功");
+    log.info("测试开始时间:" + startTime + ".测试完成时间:" + endTime + ".测试耗时:" + execTime);
   }
-
 
   private float execTime(ITestResult tr) {
 
@@ -80,5 +79,4 @@ public class TestListener extends TestListenerAdapter {
     res = simpleDateFormat.format(date);
     return res;
   }
-
 }

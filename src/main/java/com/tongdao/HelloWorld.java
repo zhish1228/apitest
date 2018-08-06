@@ -5,10 +5,7 @@ package com.tongdao;
  */
 public class HelloWorld {
 
-    public static void main(String[] s){
-
-        System.out.println("hello world");
-
-    }
-
+  public static void main(String[] s) {
+    System.out.println("hello world");
+  }
 }

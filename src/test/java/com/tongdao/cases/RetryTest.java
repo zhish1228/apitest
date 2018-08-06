@@ -5,6 +5,8 @@ import com.tongdao.conf.test.TestListener;
 import com.tongdao.entity.HttpParamEntity;
 import com.tongdao.util.DataProviderUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
@@ -15,6 +17,7 @@ import org.testng.annotations.Test;
 /**
  * Created by zhengda on 2018/8/6.
  */
+@Slf4j
 @Listeners({TestListener.class})
 public class RetryTest {
 
@@ -31,7 +34,7 @@ public class RetryTest {
   public void hehe(HttpParamEntity httpParam) throws Exception {
 
     String caseName = httpParam.getCaseName();
-    System.out.println(caseName);
+    log.info(caseName);
     Assert.fail();
   }
 }
