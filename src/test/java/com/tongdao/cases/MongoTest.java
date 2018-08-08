@@ -1,8 +1,8 @@
 package com.tongdao.cases;
 
-import com.google.gson.Gson;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPath;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
@@ -13,9 +13,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
-import com.td.spec.marketdata.common.entity.KLine;
 import com.tongdao.conf.MConfig;
 import com.tongdao.conf.test.RetryAnalyzer;
+import com.tongdao.entity.KLine;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,9 +29,14 @@ import org.testng.ITestNGMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 /**
@@ -73,14 +78,12 @@ public class MongoTest {
 
     long beforeTest = kLineCollection.countDocuments();
 
-    // jackson方式toJson
-    ObjectMapper mapper = new ObjectMapper();
     // 新建存储的kline对象
     KLine k1 = new KLine();
     k1.setCode(code);
     k1.setOpen(1L);
     k1.setClose(2L);
-    kLineCollection.insertOne(Document.parse(mapper.writeValueAsString(k1)));
+    kLineCollection.insertOne(Document.parse(JSONObject.toJSONString(k1)));
 
     // gson形式插入
     KLine k2 = new KLine();
@@ -88,11 +91,8 @@ public class MongoTest {
     k2.setOpen(1L);
     k2.setClose(2L);
 
-    Gson gson = new Gson();
-    String kJson = gson.toJson(k2);
-
     List<Document> documentList = new ArrayList<>();
-    documentList.add(Document.parse(kJson));
+    documentList.add(Document.parse(JSONObject.toJSONString(k2)));
     kLineCollection.insertMany(documentList);
 
     long afterTest = kLineCollection.countDocuments();
@@ -120,8 +120,8 @@ public class MongoTest {
         }
       }).build();
       String s = iterator.next().toJson(settings);
-      Gson g = new Gson();
-      KLine kLine = g.fromJson(s, KLine.class);
+      KLine kLine = JSONObject.parseObject(s, KLine.class);
+
       log.info("kline code is:" + kLine.getCode());
     }
   }
@@ -146,4 +146,28 @@ public class MongoTest {
     log.info("afterTest is:" + afterTest);
   }
 
+  @Test
+  public void jsonPathTest() throws Exception {
+    log.info("starttttttttttttttt");
+    OkHttpClient client = new OkHttpClient();
+    Request request = new Request.Builder()
+        .url("https://www.sojson.com/open/api/weather/json.shtml?city=%E5%8C%97%E4%BA%AC")
+        .get()
+        .build();
+
+    Response response = client.newCall(request).execute();
+    if (response.isSuccessful()) {
+      String respBody = response.body().string();
+//      log.info(respBody);
+      JSONObject res = JSONObject.parseObject(respBody);
+      Object eval = JSONPath.eval(res, "$.data");
+      log.info(JSONObject.toJSONString(eval));
+
+      int size = JSONPath.size(res, "$.data");
+      log.info(String.valueOf(size));
+
+    } else {
+      throw new IOException("Unexpected code " + response);
+    }
+  }
 }
