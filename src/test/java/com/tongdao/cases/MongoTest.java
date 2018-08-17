@@ -146,6 +146,14 @@ public class MongoTest {
     log.info("afterTest is:" + afterTest);
   }
 
+  /**
+   * 1.拿到resp json
+   * 2、转换成bean （新建一个bean的类）
+   * 3、断言
+   *
+   * @throws Exception
+   */
+
   @Test
   public void jsonPathTest() throws Exception {
     log.info("starttttttttttttttt");
@@ -161,6 +169,7 @@ public class MongoTest {
 //      log.info(respBody);
       JSONObject res = JSONObject.parseObject(respBody);
       Object eval = JSONPath.eval(res, "$.data");
+
       log.info(JSONObject.toJSONString(eval));
 
       int size = JSONPath.size(res, "$.data");
