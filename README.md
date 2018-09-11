@@ -22,5 +22,7 @@ http请求的参数(from db)
 
 # 6.todo
 DB数据回滚
-优化结构
+db包含jsonpath与校验值,自动断言
 整合所有apitest,通过jenkins指定module run test(mvn xx -pl module_name -am)
+根据db method字段自动调用http请求,精简test方法
+优化代码?
