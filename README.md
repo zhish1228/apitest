@@ -1,22 +1,26 @@
-# 使用方式
+# 1.使用方式
 1.安装maven
 2.使用maven命令mvn clean test执行测试脚本 <br/>
-3...... <br/>
+3.可以通过mvn clean test testng.xml或者pom中的plugin指定执行文件 <br/>
 
-# bean
-http请求的参数
+# 2.bean
+http请求的参数(from db)
 
-# cases
+# 3.cases
 具体运行的case，包含初始化数据和测试脚本<br/>
+同一test多个case依赖db数据驱动,测试方法methodName需要与table中casename字段相同
 
-# conf
+# 4.conf
 全局配置
+## conf/test
+测试配置:
+失败重试,重试记录skip
+运行监听器，目前只有log,可做异常处理(如输出信息，screenshot等)
 
-# listener
-运行监听器，目前只有log
+# 5.utils
+数据库、http工具、dataprovider(test data from db)
 
-# utils
-数据库、http、dataprovider、随机用户信息
-
-# todo
-失败重试、运行log、多线程执行
+# 6.todo
+DB数据回滚
+优化结构
+整合所有apitest,通过jenkins指定module run test(mvn xx -pl module_name -am)
