@@ -20,9 +20,9 @@ http请求的参数(from db)
 # 5.utils
 数据库、http工具、dataprovider(test data from db)
 
-# 6.todo
-DB数据回滚
-db包含jsonpath与校验值,自动断言
-整合所有apitest,通过jenkins指定module run test(mvn xx -pl module_name -am)
-根据db method字段自动调用http请求,精简test方法
-优化代码?
+# 6.run
+mvn clean test -pl <module-name>  -Denvironment=dev
+
+# 7.todo
+http协议其它方法(目前只有get)
+
