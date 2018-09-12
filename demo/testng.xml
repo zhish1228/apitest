@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1">
+    <test name="spec-apitest">
+        <classes>
+            <class name="td.spec.muji.td.spec.muji.manager.cases.RetryTest">
+            </class>
+        </classes>
+    </test>
+</suite>
