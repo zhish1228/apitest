@@ -19,7 +19,7 @@ public interface ManagerHttpParamDao {
    * 查测试数据
    */
   @Select("select id as 'id', casename as 'casename', path as 'path', request_method as 'requestMethod', " +
-      "request_params as 'requestParams', request_body as 'requestBody', response_code as responseCode, " +
+      "request_params as 'requestParams', request_body as 'requestBody', response_code as 'responseCode', " +
       "response_body as 'responseBody', jsonpath as 'jsonpath', except_value as 'exceptValue' ,description as 'description' " +
       "from t_api_manager where casename = #{caseName}  and available = 1")
   List<ManagerHttpParamEntity> selectByCaseName(String caseName);
