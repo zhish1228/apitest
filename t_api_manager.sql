@@ -11,7 +11,7 @@
  Target Server Version : 50636
  File Encoding         : 65001
 
- Date: 12/09/2018 20:58:03
+ Date: 18/09/2018 10:37:07
 */
 
 SET NAMES utf8mb4;
@@ -35,13 +35,14 @@ CREATE TABLE `t_api_manager` (
   `available` bit(1) DEFAULT b'1',
   `description` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_api_manager
 -- ----------------------------
 BEGIN;
 INSERT INTO `t_api_manager` VALUES (2, 'getCorrelators', 'api/v1/apama/component', 'GET', 'ComponentEnum=CORRELATOR', '', 200, NULL, '.code', '0', b'1', '');
+INSERT INTO `t_api_manager` VALUES (3, 'getCorrelators2', 'api/v1/apama/component', 'GET', 'ComponentEnum=CORRELATOR', '', 200, NULL, '.code', '0', b'1', '');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

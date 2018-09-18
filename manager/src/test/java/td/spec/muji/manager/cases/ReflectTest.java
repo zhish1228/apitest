@@ -36,4 +36,25 @@ public class ReflectTest extends BaseTest {
     Assert.assertEquals(eval.toString(), managerHttpParamEntity.getExceptValue());
 
   }
+
+  @Test(dataProvider = "httpParamsDataProvider", dataProviderClass = DataProviderUtil.class)
+  public void getCorrelators2(ManagerHttpParamEntity managerHttpParamEntity) throws Exception {
+
+    log.info("test data is :" + managerHttpParamEntity.toString());
+
+    // http request
+    String requestMethod = getRequestMethodName(managerHttpParamEntity.getRequestMethod());
+    String requestPath = managerHttpParamEntity.getPath();
+    String requestParam = managerHttpParamEntity.getRequestParams();
+
+    // 反射调用静态方法
+    Class<?> httpClientClazz = Class.forName("td.spec.muji.manager.util.HttpClient");
+    Method method = httpClientClazz.getMethod("do" + requestMethod, String.class, String.class);
+    Object responseBody = method.invoke(httpClientClazz.newInstance(), requestPath, requestParam);
+
+    // 通过jsonpath断言
+    JSONObject res = JSONObject.parseObject(responseBody.toString());
+    Object eval = JSONPath.eval(res, "$.code");
+    Assert.assertEquals(eval.toString(), managerHttpParamEntity.getExceptValue());
+  }
 }

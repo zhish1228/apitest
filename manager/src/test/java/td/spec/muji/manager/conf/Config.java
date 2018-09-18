@@ -14,8 +14,8 @@ public class Config {
   // 被测试服务端地址
   public static String url;
 
+  // 测试环境
   public static String environment = System.getProperty("environment");
-//  public static String environment = "dev";
 
   // db config
   private static SqlSessionFactory sqlSessionFactory = MyBatisUtil.getSqlsessionfactory("mybatis-config.xml");
@@ -23,6 +23,9 @@ public class Config {
 
   static {
     sqlSession.getConfiguration().addMappers("td.spec.muji.manager.dao");
-  }
 
+    if (environment == null) {
+      environment = "dev";
+    }
+  }
 }

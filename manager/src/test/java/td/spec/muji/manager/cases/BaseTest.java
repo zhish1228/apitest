@@ -43,4 +43,11 @@ public class BaseTest {
     ManagerConfigParamEntity managerConfigParamEntity = mapper.selectByEnvironment(Config.environment);
     Config.url = "http://" + managerConfigParamEntity.getIp() + ":" + managerConfigParamEntity.getPort();
   }
+
+
+  protected String getRequestMethodName(String methodStr) {
+
+    // 拼调用方法名称
+    return methodStr.substring(0, 1).toUpperCase() + methodStr.substring(1).toLowerCase();
+  }
 }
