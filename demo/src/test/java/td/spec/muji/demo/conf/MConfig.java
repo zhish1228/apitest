@@ -1,7 +1,7 @@
 package td.spec.muji.demo.conf;
 
 /**
- * Created by zhengda on 2018/8/2. mongodb配置参数
+ * Created by zhish1228 on 2018/8/2. mongodb配置参数
  */
 public class MConfig {
 

@@ -23,7 +23,7 @@ import td.spec.muji.demo.util.UserInfoUtil;
 @Listeners({TestListener.class})
 public class BaseTest {
 
-  private String reqBody = "{  \"code\": \"9M3DC\",  \"codeId\": \"1504664616195\",  \"passwd\": \"zd1234\",  \"userName\": \"zhengda\",  \"userType\": \"A\"}";
+  private String reqBody = "{  \"code\": \"9M3DC\",  \"codeId\": \"1504664616195\",  \"passwd\": \"zd1234\",  \"userName\": \"zhish1228\",  \"userType\": \"A\"}";
 
   /**
    * 初始化环境

@@ -6,7 +6,7 @@ import java.util.List;
 import td.spec.muji.demo.entity.HttpParamEntity;
 
 /**
- * Created by zhengda on 2017/9/6.
+ * Created by zhish1228 on 2017/9/6.
  */
 public interface HttpParamDao {
 

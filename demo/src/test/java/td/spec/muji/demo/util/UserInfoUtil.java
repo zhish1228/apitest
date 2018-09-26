@@ -7,7 +7,7 @@ import java.util.Random;
 import td.spec.muji.demo.conf.Config;
 
 /**
- * Created by zhengda on 2017/9/11.
+ * Created by zhish1228 on 2017/9/11.
  */
 public class UserInfoUtil {
 

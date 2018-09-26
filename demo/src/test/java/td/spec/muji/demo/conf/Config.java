@@ -2,7 +2,7 @@ package td.spec.muji.demo.conf;
 
 
 /**
- * Created by zhengda on 2017/9/5.
+ * Created by zhish1228 on 2017/9/5.
  */
 public class Config {
 
@@ -27,7 +27,7 @@ public class Config {
   public static int userId;
 
   // 管理员用户名
-  public static final String adminName = "zhengda";
+  public static final String adminName = "zhish1228";
   public static final String adminPassword = "zd1234";
   public static final String nameSuffix = "99";
 

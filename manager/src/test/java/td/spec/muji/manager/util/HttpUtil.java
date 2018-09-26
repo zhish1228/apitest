@@ -13,7 +13,7 @@ import td.spec.muji.manager.conf.Config;
 
 
 /**
- * Created by zhengda on 2017/7/26.
+ * Created by zhish1228 on 2017/7/26.
  */
 public class HttpUtil {
 

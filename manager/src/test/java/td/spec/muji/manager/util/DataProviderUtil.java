@@ -12,7 +12,7 @@ import td.spec.muji.manager.dao.ManagerHttpParamDao;
 import td.spec.muji.manager.entity.HttpParamEntity;
 
 /**
- * Created by zhengda on 2017/9/5.
+ * Created by zhish1228 on 2017/9/5.
  */
 public class DataProviderUtil {
 

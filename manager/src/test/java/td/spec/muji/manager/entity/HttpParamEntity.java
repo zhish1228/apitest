@@ -5,7 +5,7 @@ import lombok.Data;
 import td.spec.muji.manager.model.constants.RequestMethodEnum;
 
 /**
- * Created by zhengda on 2017/9/6. 对应db中存储参数的table
+ * Created by zhish1228 on 2017/9/6. 对应db中存储参数的table
  */
 @Data
 public class HttpParamEntity {

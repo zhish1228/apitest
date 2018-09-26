@@ -10,7 +10,7 @@ import td.spec.muji.manager.entity.ManagerConfigParamEntity;
 import td.spec.muji.manager.entity.HttpParamEntity;
 
 /**
- * Created by zhengda on 2017/9/6.
+ * Created by zhish1228 on 2017/9/6.
  */
 @Mapper
 public interface ManagerHttpParamDao {

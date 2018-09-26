@@ -3,7 +3,7 @@ package td.spec.muji.demo.entity;
 import lombok.Data;
 
 /**
- * Created by zhengda on 2017/9/6. 对应db中存储参数的table
+ * Created by zhish1228 on 2017/9/6. 对应db中存储参数的table
  */
 @Data
 public class HttpParamEntity {

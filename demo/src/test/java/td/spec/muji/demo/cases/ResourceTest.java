@@ -12,7 +12,7 @@ import td.spec.muji.demo.util.DataProviderUtil;
 import td.spec.muji.demo.util.HttpUtil;
 
 /**
- * Created by zhengda on 2017/9/11.
+ * Created by zhish1228 on 2017/9/11.
  */
 public class ResourceTest extends BaseTest {
 

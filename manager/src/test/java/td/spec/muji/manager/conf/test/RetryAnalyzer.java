@@ -8,7 +8,7 @@ import org.testng.ITestResult;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by zhengda on 2018/8/6.
+ * Created by zhish1228 on 2018/8/6.
  */
 @Slf4j
 public class RetryAnalyzer implements IRetryAnalyzer {
