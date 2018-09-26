@@ -1,28 +1,32 @@
 # 1.使用方式
-1.安装maven
-2.使用maven命令mvn clean test执行测试脚本 <br/>
-3.可以通过mvn clean test testng.xml或者pom中的plugin指定执行文件 <br/>
+1.安装maven  
+2.使用maven命令mvn clean test执行测试脚本  
+3.当前默认使用testng.xml驱动测试  
 
-# 2.bean
-http请求的参数(from db)
+# 2. module
+* demo : 旧代码,可忽略
+* manager : 基本框架 
 
-# 3.cases
-具体运行的case，包含初始化数据和测试脚本<br/>
-同一test多个case依赖db数据驱动,测试方法methodName需要与table中casename字段相同
+# 3.entity
+测试数据对应的表entity,主要包含http请求的参数和断言信息
 
-# 4.conf
+# 4.cases
+具体运行的case，包含初始化数据和测试脚本  
+同一test多个case依赖db数据驱动,测试方法methodName需要与table中casename字段相同   
+
+# 5.conf
 全局配置
-## conf/test
-测试配置:
-失败重试,重试记录skip
-运行监听器，目前只有log,可做异常处理(如输出信息，screenshot等)
+## 4.1 conf/test
+测试配置:  
+失败重试,提高脚本运行稳定,重试记录skip  
+运行监听器，目前只有log,可做异常处理(如输出信息，screenshot等)  
 
-# 5.utils
-数据库、http工具、dataprovider(test data from db)
+# 6.utils
+数据库、http工具、dataprovider
 
-# 6.run
-mvn clean test -pl <module-name>  -Denvironment=dev
-
-# 7.todo
-http协议其它方法(目前只有get)
-
+# 7.run
+在本地或者jenkins上执行,可配合TestNG Results插件查看结果   
+mvn clean test -pl <module-name>  -Denvironment=dev   
+如:clean test -pl  manager   -Denvironment=dev
+# 8.todo
+...

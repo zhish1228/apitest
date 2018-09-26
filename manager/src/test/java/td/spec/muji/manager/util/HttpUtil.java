@@ -13,11 +13,8 @@ import td.spec.muji.manager.conf.Config;
 
 
 /**
- * 接口测试如果以多线程方式执行会有问题.
- *
  * Created by zhengda on 2017/7/26.
  */
-@Deprecated
 public class HttpUtil {
 
   private static final MediaType APPLICATION_JSON = MediaType.parse("application/json; charset=utf-8");
@@ -25,87 +22,94 @@ public class HttpUtil {
   /**
    * 发送geeeeet请求
    */
-  public static String doGet(String path, String params) throws Exception {
+  public static String doGet(String requestPath, String requestParams, String requestBody) throws Exception {
+
+    HttpUrl url = getUrl(requestPath, requestParams);
+    Request request = new Request.Builder()
+        .url(url)
+//        .addHeader("Authorization", "Bearer " + Config.token)
+        .get()
+        .build();
 
     OkHttpClient client = new OkHttpClient();
+    Response response = client.newCall(request).execute();
+    if (response.isSuccessful()) {
+      return response.body().string();
+    } else {
+      throw new IOException("Unexpected code " + response);
+    }
+  }
+
+  /**
+   * 发送posssssssssssst请求
+   */
+  public static String doPost(String requestPath, String requestParams, String requestBody) throws Exception {
+
+    HttpUrl url = getUrl(requestPath, requestParams);
+    RequestBody body = RequestBody.create(APPLICATION_JSON, requestBody);
+    Request request = new Request.Builder()
+        .url(url)
+//        .addHeader("Authorization", "Bearer " + Config.token)
+        .post(body)
+        .addHeader("content-type", "application/json")
+        .build();
+
+    OkHttpClient client = new OkHttpClient();
+    Response response = client.newCall(request).execute();
+    if (response.isSuccessful()) {
+      return response.body().string();
+    } else {
+      throw new IOException("Unexpected code " + response);
+    }
+  }
+
+  /**
+   * 发送puuuuuuuuuuuut请求
+   */
+  public static String doPut(String path, String params, String requestBody) throws Exception {
+
+    HttpUrl url = getUrl(path, params);
+    RequestBody body = RequestBody.create(APPLICATION_JSON, requestBody);
+    Request request = new Request.Builder()
+        .url(url)
+//        .addHeader("Authorization", "Bearer " + Config.token)
+        .put(body)
+        .addHeader("content-type", "application/json")
+        .build();
+
+    OkHttpClient client = new OkHttpClient();
+    Response response = client.newCall(request).execute();
+    if (response.isSuccessful()) {
+      return response.body().string();
+    } else {
+      throw new IOException("Unexpected code " + response);
+    }
+  }
+
+  /**
+   * 根据config中的url以及db中的path和param拼接url
+   *
+   * @param requestPath   请求路径 以斜线/分割
+   * @param requestParams 请求参数 参数以&符号分割 KV以=分割
+   * @return 请求的完整url
+   */
+  private static HttpUrl getUrl(String requestPath, String requestParams) {
+
     HttpUrl.Builder builder = HttpUrl.parse(Config.url).newBuilder();
 
     // set path
-    String[] pathSplit = path.split("/");
+    String[] pathSplit = requestPath.split("/");
     for (String p : pathSplit) {
       builder.addPathSegment(p);
     }
 
     // set parameter
-    String[] paramSplit = params.split("&");
+    String[] paramSplit = requestParams.split("&");
     for (String param : paramSplit) {
       String[] split = param.split("=");
       builder.addQueryParameter(split[0], split[1]);
     }
-
-    HttpUrl url = builder.build();
-    Request request = new Request.Builder()
-        .url(url)
-        .get()
-        .build();
-
-    Response response = client.newCall(request).execute();
-    if (response.isSuccessful()) {
-      return response.body().string();
-    } else {
-      throw new IOException("Unexpected code " + response);
-    }
+    return builder.build();
   }
 
-  public static String doPost(String path, String params, String json) throws Exception {
-
-    OkHttpClient client = new OkHttpClient();
-    String url = Config.url + path;
-    if (!url.startsWith("http://")) {
-      url = "http://" + url;
-    }
-
-    if (params != null && params.length() != 0) {
-      url = url + "?" + params;
-    }
-
-    RequestBody body = RequestBody.create(APPLICATION_JSON, json);
-    Request request = new Request.Builder()
-        .url(url)
-        .post(body)
-        .addHeader("content-type", "application/json")
-        .build();
-    Response response = client.newCall(request).execute();
-    if (response.isSuccessful()) {
-      return response.body().string();
-    } else {
-      throw new IOException("Unexpected code " + response);
-    }
-  }
-
-  public static String doPut(String path, String params, String json) throws Exception {
-
-    OkHttpClient client = new OkHttpClient();
-    String url = Config.url + path;
-    if (!url.startsWith("http://")) {
-      url = "http://" + url;
-    }
-
-    if (params != null && params.length() != 0) {
-      url = url + "?" + params;
-    }
-
-    RequestBody body = RequestBody.create(APPLICATION_JSON, json);
-    Request request = new Request.Builder()
-        .url(url)
-        .put(body)
-        .addHeader("content-type", "application/json")
-        .build();
-    Response response = client.newCall(request).execute();
-    if (response.isSuccessful()) {
-      return response.body().string();
-    } else {
-      throw new IOException("Unexpected code " + response);
-    }
-  }
 }

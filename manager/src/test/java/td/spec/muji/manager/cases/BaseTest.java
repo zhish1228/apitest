@@ -33,13 +33,23 @@ public class BaseTest {
   @BeforeSuite
   public void before(ITestContext context) {
 
-    // 全局添加重试监听器
+    // 全局添加重试监听器,不需要在xml中配置
     addRetryListener(context);
     // 设置测试地址
     initTestAddr();
 
+    // 获取token
+    // 生成当前时间戳,请求验证码地址(http://192.168.15.171:8009/api/v1/auth/verifycode?timeStamp=1537957093687),连接redis,通过时间戳获取value
+    // doPost模拟登录，提供用户密码验证码
+    // 解析respbody  赋值给Config.token
+
   }
 
+  /**
+   * 为所有方法添加重试监听
+   *
+   * @param context ctx
+   */
   private void addRetryListener(ITestContext context) {
 
     for (ITestNGMethod method : context.getAllTestMethods()) {
@@ -47,6 +57,9 @@ public class BaseTest {
     }
   }
 
+  /**
+   * 根据conf表中配置,初始化测试环境
+   */
   private void initTestAddr() {
 
     ManagerHttpParamDao mapper = Config.sqlSession.getMapper(ManagerHttpParamDao.class);
@@ -55,7 +68,7 @@ public class BaseTest {
   }
 
   /**
-   * 获取验证码
+   * 获取验证码,在测试环境用来跳过验证码识别,适用于redis保存验证码项目
    *
    * @param timeStamp 时间戳
    * @return 验证码
@@ -68,6 +81,7 @@ public class BaseTest {
     Set<String> sentinels = new HashSet<>();
     sentinels.add(redisHost);
 
+    // 哨兵模式
     JedisSentinelPool jedisSentinelPool = new JedisSentinelPool(redisMasterName, sentinels);
     HostAndPort currentHostMaster = jedisSentinelPool.getCurrentHostMaster();
 

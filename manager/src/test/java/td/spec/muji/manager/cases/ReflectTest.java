@@ -36,7 +36,7 @@ public class ReflectTest extends BaseTest {
     String exceptValue = httpParamEntity.getExceptValue();
 
     // 执行http请求
-    Class<?> httpUtilClass = Class.forName("td.spec.muji.manager.util.HttpClient");
+    Class<?> httpUtilClass = Class.forName("td.spec.muji.manager.util.HttpUtil");
     Method method = httpUtilClass.getMethod(requestMethod, String.class, String.class, String.class);
     Object responseBody = method.invoke(null, requestPath, requestParams, requestBody);
 

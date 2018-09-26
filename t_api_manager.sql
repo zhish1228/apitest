@@ -41,8 +41,8 @@ CREATE TABLE `t_api_manager` (
 -- Records of t_api_manager
 -- ----------------------------
 BEGIN;
-INSERT INTO `t_api_manager` VALUES (2, 'getCorrelators', 'api/v1/apama/component', 'GET', 'ComponentEnum=CORRELATOR', '', 200, NULL, '.code', '0', b'1', '');
-INSERT INTO `t_api_manager` VALUES (3, 'getCorrelators2', 'api/v1/apama/component', 'GET', 'ComponentEnum=CORRELATOR', '', 200, NULL, '.code', '0', b'1', '');
+INSERT INTO `t_api_manager` VALUES (1, 'getCorrelators', 'api/v1/apama/component', 'GET', 'ComponentEnum=CORRELATOR', '', 200, NULL, '.code', '0', b'1', '');
+INSERT INTO `t_api_manager` VALUES (2, 'getCorrelators2', 'api/v1/apama/component', 'GET','ComponentEnum=CORRELATOR', '', 200, NULL, '.code', '0', b'1', '');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
