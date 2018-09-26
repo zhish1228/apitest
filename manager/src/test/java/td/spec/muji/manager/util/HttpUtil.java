@@ -17,6 +17,7 @@ import td.spec.muji.manager.conf.Config;
  *
  * Created by zhengda on 2017/7/26.
  */
+@Deprecated
 public class HttpUtil {
 
   private static final MediaType APPLICATION_JSON = MediaType.parse("application/json; charset=utf-8");

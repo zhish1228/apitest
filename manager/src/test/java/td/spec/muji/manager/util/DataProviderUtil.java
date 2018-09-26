@@ -9,7 +9,7 @@ import java.util.List;
 
 import td.spec.muji.manager.conf.Config;
 import td.spec.muji.manager.dao.ManagerHttpParamDao;
-import td.spec.muji.manager.entity.ManagerHttpParamEntity;
+import td.spec.muji.manager.entity.HttpParamEntity;
 
 /**
  * Created by zhengda on 2017/9/5.
@@ -28,10 +28,10 @@ public class DataProviderUtil {
     String methodName = method.getName();
 
     ManagerHttpParamDao mapper = Config.sqlSession.getMapper(ManagerHttpParamDao.class);
-    List<ManagerHttpParamEntity> httpParam = mapper.selectByCaseName(methodName);
+    List<HttpParamEntity> httpParam = mapper.selectByCaseName(methodName);
     List<Object[]> data = new ArrayList<Object[]>();
-    for (ManagerHttpParamEntity h : httpParam) {
-      data.add(new Object[]{h});
+    for (HttpParamEntity entity : httpParam) {
+      data.add(new Object[]{entity});
     }
     return data.iterator();
   }

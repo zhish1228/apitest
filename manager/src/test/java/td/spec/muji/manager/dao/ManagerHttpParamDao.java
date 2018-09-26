@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 import td.spec.muji.manager.entity.ManagerConfigParamEntity;
-import td.spec.muji.manager.entity.ManagerHttpParamEntity;
+import td.spec.muji.manager.entity.HttpParamEntity;
 
 /**
  * Created by zhengda on 2017/9/6.
@@ -22,7 +22,7 @@ public interface ManagerHttpParamDao {
       "request_params as 'requestParams', request_body as 'requestBody', response_code as 'responseCode', " +
       "response_body as 'responseBody', jsonpath as 'jsonpath', except_value as 'exceptValue' ,description as 'description' " +
       "from t_api_manager where casename = #{caseName}  and available = 1")
-  List<ManagerHttpParamEntity> selectByCaseName(String caseName);
+  List<HttpParamEntity> selectByCaseName(String caseName);
 
   /**
    * 查询初始化数据

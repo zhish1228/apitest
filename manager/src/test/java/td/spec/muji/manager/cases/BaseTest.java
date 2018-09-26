@@ -54,13 +54,6 @@ public class BaseTest {
     Config.url = "http://" + managerConfigParamEntity.getIp() + ":" + managerConfigParamEntity.getPort();
   }
 
-
-  protected String getRequestMethodName(String methodStr) {
-
-    // 拼调用方法名称
-    return methodStr.substring(0, 1).toUpperCase() + methodStr.substring(1).toLowerCase();
-  }
-
   /**
    * 获取验证码
    *
@@ -84,4 +77,5 @@ public class BaseTest {
     resource.close();
     return resource.get(timeStamp);
   }
+
 }
