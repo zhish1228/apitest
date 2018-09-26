@@ -22,23 +22,28 @@ public class ReflectTest extends BaseTest {
 
     log.info("test data is :" + httpParamEntity.toString());
 
-    //  get 、post 、 delete 、 put ..
+    // http请求方法
     String requestMethod = httpParamEntity.getRequestMethod().getName();
+    // http请求路径
     String requestPath = httpParamEntity.getPath();
+    // http请求参数
     String requestParams = httpParamEntity.getRequestParams();
+    // http请求body
     String requestBody = httpParamEntity.getRequestBody();
+    // 断言的jsonpath
     String jsonPath = httpParamEntity.getJsonPath();
+    // 断言期望值
+    String exceptValue = httpParamEntity.getExceptValue();
 
+    // 执行http请求
     Class<?> httpUtilClass = Class.forName("td.spec.muji.manager.util.HttpClient");
-    Method method = httpUtilClass.getMethod("do" + requestMethod, String.class, String.class, String.class);
-
-    // 反射
+    Method method = httpUtilClass.getMethod(requestMethod, String.class, String.class, String.class);
     Object responseBody = method.invoke(null, requestPath, requestParams, requestBody);
 
-    // jsonpath断言
+    // 断言
     JSONObject jsonObject = JSONObject.parseObject(responseBody.toString());
     Object eval = JSONPath.eval(jsonObject, jsonPath);
-    Assert.assertEquals(eval.toString(), httpParamEntity.getExceptValue());
+    Assert.assertEquals(eval.toString(), exceptValue);
 
   }
 }

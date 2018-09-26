@@ -2,10 +2,10 @@ package td.spec.muji.manager.model.constants;
 
 public enum RequestMethodEnum {
 
-  GET("Get"),
-  POST("Post"),
-  DELETE("Delete"),
-  PUT("Put"),
+  GET("doGet"),
+  POST("doPost"),
+  DELETE("doDelete"),
+  PUT("doPut"),
 
   ;
 
