@@ -9,6 +9,7 @@
 
 # 3.entity
 测试数据对应的表entity,主要包含http请求的参数和断言信息(通过fasjon的jsonpath判断)
+jsonpath:https://github.com/alibaba/fastjson/wiki/JSONPath
 
 # 4.cases
 具体运行的case，包含初始化数据和测试脚本  
@@ -25,9 +26,10 @@
 # 6.utils
 数据库、http工具、dataprovider
 
-# 7.run
+#7.t_api_config.sql与t_api_manager.sql
+数据驱动的表结构,已经包含了初始的demo
+
+# 8.run
 在本地或者jenkins上执行,可配合TestNG Results插件查看结果   
 mvn clean test -pl <module-name>  -Denvironment=dev   
 如:clean test -pl  manager   -Denvironment=dev
-# 8.todo
-...
