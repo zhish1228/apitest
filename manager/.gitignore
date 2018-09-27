@@ -1,0 +1,119 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Java template
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+### Maven template
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
+!/.mvn/wrapper/maven-wrapper.jar
+### JetBrains template
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff:
+.idea
+
+## File-based project format:
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+*.project
+*.classpath
+*.svn
+**/target
+**/.settings
+
+tmp.sh
+**/.project.bak
+**/.project
+**/git.properties
+
+dx-*.iml
+
+.mvn/
+*.iml
+.idea/
+.settings/
+bin/
+_site/
+.classpath
+.eclipse-pmd
+.project
+*.launch
+.springBeans
+.apt_generated
+.factorypath
+.profiler
+git.properties
+codesigning.asc
+
+src/gitbook/docs
+src/gitbook/_book
+src/gitbook/*.pdf
+src/gitbook/*.epub
+src/gitbook/*.mobi
+
+bower_components
+node_modules
+
+.DS_Store
+.tmp
+
+/deprecated/
+**/src/site/markdown/README.md
+**/src/site/markdown/src/readme
+**/src/site/resources
+**/oss-workspace
+**/tmp.sh
+**/tmp
+logs
+logs/**.log
+
+application.pid
+
+Dockerfile
